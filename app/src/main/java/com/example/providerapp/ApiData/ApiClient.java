@@ -1,5 +1,8 @@
 package com.example.providerapp.ApiData;
 
+import com.example.providerapp.Models.CreateOffer;
+import com.example.providerapp.Models.OrdersResponse;
+import com.example.providerapp.Models.OrdersStatus;
 import com.example.providerapp.Models.ProviderLoginResponse;
 import com.example.providerapp.Models.ProviderRegisterResponse;
 import com.example.providerapp.Models.Work;
@@ -42,5 +45,20 @@ public class ApiClient {
     public Call<ProviderLoginResponse> providerLogin(String email
             , String password){
         return dataInterface.providerLogin(email, password);
+    }
+
+    public Call<OrdersResponse> getOrders(String authorization){
+        return dataInterface.getOrders(authorization);
+    }
+
+    public Call<OrdersResponse> getUnCompletedOrder(String authorization){
+        return dataInterface.unCompletedOrders(authorization);
+    }
+    public Call<OrdersResponse> getCompletedOrder(String authorization){
+        return dataInterface.completedOrders(authorization);
+    }
+
+    public Call<CreateOffer> createOffer(int order_ID , String authorization){
+        return dataInterface.createOffer(order_ID , authorization);
     }
 }

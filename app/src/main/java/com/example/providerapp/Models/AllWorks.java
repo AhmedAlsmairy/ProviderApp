@@ -29,6 +29,7 @@ public class AllWorks {
     public AllWorks(Integer id, String name) {
         this.id = id;
         this.name = name;
+
     }
 
     public Integer getId() {

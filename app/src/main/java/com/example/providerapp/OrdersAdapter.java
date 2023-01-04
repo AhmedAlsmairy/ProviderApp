@@ -10,13 +10,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.providerapp.Models.OrderData;
 import com.example.providerapp.Models.ProviderData;
 import com.example.providerapp.databinding.OrdersCardBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHolder> {
-    ArrayList<> data;
+    List<OrderData> data;
+    OrderData orderData;
+    DetailsClick detailsClick;
+
+    public OrdersAdapter(List<OrderData> data , DetailsClick detailsClick) {
+        this.data = data;
+        this.detailsClick = detailsClick;
+    }
 
     @NonNull
     @Override
@@ -29,6 +38,20 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder binding, int position) {
         int pos = position;
+        orderData = data.get(pos);
+
+        binding.customerName.setText(orderData.getUser().getName());
+        binding.orderDate.setText(orderData.getCreatedAt());
+        binding.orderID.setText(String.valueOf(orderData.getId()));
+        binding.orderLocation.setText(orderData.getLong()+"/"+orderData.getLat());
+
+        binding.orderDetailsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                detailsClick.details(orderData.getId() , orderData);
+            }
+        });
+
         //TODO set data
 
     }
